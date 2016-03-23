@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (mDiskLruCache != null && !mDiskLruCache.isClosed()) {
                     try {
                         mDiskLruCache.delete();
+                        //调用delete方法内部会调用close方法这样，下面请求缓存大小的方法会失效，所以下面直接把缓存搞成0了。
                         cache_text.setText("缓存大小：" + getFormatSize(0));
                     } catch (IOException e) {
                         e.printStackTrace();
